@@ -12,7 +12,7 @@
       <v-main id="nav">
         <v-container fluid>
           <router-link to="/get-questions"> Get Questions</router-link> |
-          <router-link to="/post-questions">Post a Question</router-link>
+          <router-link to="/post-question">Post a Question</router-link>
           <router-view></router-view>
         </v-container>
       </v-main>
