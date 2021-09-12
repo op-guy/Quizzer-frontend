@@ -50,7 +50,7 @@ export default {
   methods: {
     sendformData: function () {
       console.log(JSON.stringify(this.form));
-      fetch("http://127.0.0.1:8000/", {
+      fetch("http://127.0.0.1:8000/questions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

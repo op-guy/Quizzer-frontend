@@ -18,8 +18,23 @@
                 :key="opt.id"
                 :label="opt"
                 :value="opt"
+                @click="assignVals(opt, entry.id)"
               ></v-radio>
             </v-radio-group>
+            <template v-if="choice_id == entry.id">
+              <template v-if="choice == entry.correct_answer">
+                Correct
+                <p style="color: green">&#10004;</p>
+              </template>
+              <template
+                v-else-if="choice != null && choice != entry.correct_answer"
+              >
+                Wrong
+                <p style="color: red">&#10008;</p>
+                The correct answer is
+                {{ entry.correct_answer }}</template
+              >
+            </template>
           </v-card>
         </li>
       </div>
@@ -35,6 +50,7 @@ export default {
     return {
       questions: [],
       choice: null,
+      choice_id: null,
       topic: null,
       topic_list: ["Any"],
     };
@@ -46,7 +62,7 @@ export default {
     answerList: (val) => val.split(";").slice(0, -1),
     initialFetch: function () {
       this.questions = [];
-      let url = "http://127.0.0.1:8000/";
+      let url = "http://127.0.0.1:8000/questions";
       
       fetch(url , {
       method: "GET",
@@ -68,11 +84,11 @@ export default {
 
     questionPick: function () {
       this.questions = [];
-      let url = "http://127.0.0.1:8000/";
+      let url = "http://127.0.0.1:8000/questions";
       let sendBody = {};
       let sendMethod = 'GET';
       if(this.topic != "Any") {
-        url += "question-list";
+        url = "http://127.0.0.1:8000/questions-by-topic";
         sendBody["topic"] = this.topic;
         sendMethod = 'POST';
       }
@@ -113,6 +129,13 @@ export default {
             });
       }
     },
+    assignVals: function(answer, question_id) {
+        console.log(answer)
+        console.log(question_id)
+        this.choice_id = question_id
+        this.choice = answer
+        return
+    }
   },
   computed: {},
 };
