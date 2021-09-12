@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import GetQuestions from "../views/GetQuestions.vue";
 import PostQuestion from "../views/PostQuestion.vue";
+import UpdateQuestion from "../views/UpdateQuestion.vue";
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
     path: "/post-question",
     name: "post-questions",
     component: PostQuestion,
+  },
+  {
+    path: "/update-question",
+    name: "update-question",
+    component: UpdateQuestion,
   },
 ];
 
